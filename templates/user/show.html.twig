@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patient{% endblock %}
+
+{% block body %}
+ <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="index.html">CONSULTY</a></h1>
+     
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="/">Home</a></li>
+      
+             {% if not app.user %}
+                <li><a class="nav-link scrollto" href="/register">Register</a></li>
+                <li><a class="nav-link scrollto" href="/login">Login</a></li>
+                
+             {% elseif  app.user.roles == ["ROLE_ADMIN","ROLE_USER"] %}
+                <li><a class="nav-link scrollto" href="/admin/user">Patients</a></li>
+                <li><a class="nav-link scrollto" href="/reservation/admin/liste">liste des Conultations</a></li>
+             {% elseif  app.user.roles == ["ROLE_USER"] %}
+                <li><a class="nav-link scrollto" href="/reservation/new">Reservation</a></li>
+            
+            {% endif %}
+            {% if app.user %}
+                <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+            {% endif %}
+          <!--another page-->
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header>
+  <!-- End Header -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div  class="container">
+    <h1>{{ user.lastName }} {{ user.firstName }} <a id="trt" class="btn btn-secondary"  href="{{ path('app_user_edit', {'id': user.id}) }}">Traiter</a></h1>
+ <a class="fa fa-arrow-left" aria-hidden="true" href="{{ path('app_user_index') }}">back to list</a>
+    <table class="table table-striped table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+              <tr>
+                <th>Cin</th>
+                <td>{{ user.cin }}</td>
+            </tr>
+             <tr>
+                <th>FirstName</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+              <tr>
+                <th>Adresse</th>
+                <td>{{ user.adresse }}</td>
+            </tr>
+           
+         
+          
+        </tbody>
+    </table>
+    {{ include('user/_delete_form.html.twig') }}
+<div>
+{% endblock %}

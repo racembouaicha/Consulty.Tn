@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+ <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="index.html">CONSULTY</a></h1> 
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="/">Home</a></li>
+         
+             {% if not app.user %}
+                <li><a class="nav-link scrollto" href="/register">Register</a></li>
+                <li><a class="nav-link scrollto" href="/login">Login</a></li>
+                
+             {% elseif  app.user.roles == ["ROLE_ADMIN","ROLE_USER"] %}
+                <li><a class="nav-link scrollto" href="/admin/user">Patients</a></li>
+            
+             {% elseif  app.user.roles == ["ROLE_USER"] %}
+                <li><a class="nav-link scrollto" href="/reservation/new">Reservation</a></li>
+            
+            {% endif %}
+            {% if app.user %}
+                <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+            {% endif %}
+          <!--another page-->
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header>
+  <!-- End Header -->
+    <br><br><br>
+  <section id="appointment" class="appointment section-bg">
+    <div class="container">
+      <div class="section-title">
+        <h2>Make an Appointment</h2>
+      </div>
+  <form  method="post" role="form" class="php-email-form">
+       
+    {{ include('reservation/_form.html.twig') }}
+</form>
+    </div>
+  </section>
+    <a href="{{ path('app_reservation_index') }}">back to list</a>
+{% endblock %}

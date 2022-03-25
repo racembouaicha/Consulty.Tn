@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    <div class="row">
+    <div class="col-md-4 form-group">
+      {{form_row(form.name, {'attr':{'class':'form-control'}})}}
+    </div>
+    <div class="col-md-4 form-group mt-3 mt-md-0">
+    {{form_row(form.email, {'attr':{'class':'form-control'}})}}
+    </div>
+    <div class="col-md-4 form-group mt-3 mt-md-0">
+    {{form_row(form.phone, {'attr':{'class':'form-control'}})}}
+    </div>
+    </div>
+     <div class="row">
+     <div class="col-md-12 form-group mt-4">
+     <div class="text-center">
+    {{form_row(form.date, {'attr':{'class':'datepicker'}})}}
+    </div>
+    </div>
+    </div>
+    <div class="text-center">
+    <button type="submit">{{ button_label|default('Make an Appointment') }}</button>
+    </div>
+
+{{ form_end(form) }}
+
